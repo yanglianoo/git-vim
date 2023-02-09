@@ -40,4 +40,11 @@ git checkout 22dfbf1f907764c5ae70381b8191104f9af21d8c #commit号
 7.最后就可以重新提交一下代码了，直接git push就可
 原文链接：https://blog.csdn.net/zhuhongyang_/article/details/118521264
 ```
-
+ - git 创建`gitignore`文件
+```git
+    <!-- 直接在项目目录下 touch .gitignore -->
+    git rm -r --cached .    #新增的忽略文件没有生效，是因为git是有缓存的，而之前的文件在缓存中，并不会清除掉，还会继续提交，所以更新.gitignore文件，要清除缓存文件
+    git add .
+    git commit -m 'update .gitignore'
+    git push origin master
+```
