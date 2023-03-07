@@ -48,3 +48,8 @@ git checkout 22dfbf1f907764c5ae70381b8191104f9af21d8c #commit号
     git commit -m 'update .gitignore'
     git push origin master
 ```
+ - `git stash`: 保存工作现场，即可切换到其他分之开发
+ - `git stash pop`: 弹出暂存的更改，继续开发，恢复的同时把stash内容也删了
+ - `git stash list`: 查看被statsh的内容
+ - `git stash drop`: 删除stash的内容   
+ 

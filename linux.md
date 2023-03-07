@@ -22,3 +22,5 @@
    ![](image/3.png)
     可以看出 libmscl.so 动态库找不到，因此需要添加程序执行时的动态库搜寻路径
 - `locate`:定位头文件或者库文件在linux文件系统下的位置
+- `file`
+   ![](image/4.png)
