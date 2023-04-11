@@ -9,6 +9,9 @@ git commit --amend --no-edit #不会进入编辑器，直接进行提交
 git config --global core.editor /usr/bin/vim
 ```
 
+
+
+
 - git撤销文件的修改
 
 ```bash
@@ -19,6 +22,8 @@ git checkout -- 文件名
 git checkout .
 ```
 
+
+
 - git切换到某个commit ID
 
 ```bash
@@ -28,9 +33,12 @@ git log
 git checkout 22dfbf1f907764c5ae70381b8191104f9af21d8c #commit号
 ```
 
+
+
+
 - git提交代码时出现Everything up-to-date的解决办法
 
-```bash
+```shell
 1. 创建一个新的分支：git branch newBranch
 2. 查看分支是否创建成功：git branch
 3  切换到此分支：git checkout newBranch
@@ -40,16 +48,51 @@ git checkout 22dfbf1f907764c5ae70381b8191104f9af21d8c #commit号
 7.最后就可以重新提交一下代码了，直接git push就可
 原文链接：https://blog.csdn.net/zhuhongyang_/article/details/118521264
 ```
+
+
+
+
  - git 创建`gitignore`文件
-```git
+```shell
     <!-- 直接在项目目录下 touch .gitignore -->
     git rm -r --cached .    #新增的忽略文件没有生效，是因为git是有缓存的，而之前的文件在缓存中，并不会清除掉，还会继续提交，所以更新.gitignore文件，要清除缓存文件
     git add .
     git commit -m 'update .gitignore'
     git push origin master
 ```
+
+
+
+- `git push`提示`Username for 'https://github.com'` 解决办法
+
+```shell
+$ git add .
+$ git commit -m 'first commit'
+[master (root-commit) 3f1b963] first commit
+1 files changed, 59 insertions(+)
+create mode 100644 readme.md
+$ git remote add origin https://github.com/XXXX/project.git
+$ git push -u origin master
+Username for 'https://github.com':
+```
+
+这里的账号是没问题，可是`password`并不是账号密码的这个密码，而是`github`里面 `develop setting` 里面的`acess key`;
+
+解决办法：修改 .git/config 文件
+
+```http
+将 https://github.com/XXXX/project.git 改为
+git@github.com:XXXX/project.git
+```
+
+
+
+- `git stash` 暂存缓冲区
+
+```shell
  - `git stash`: 保存工作现场，即可切换到其他分之开发
  - `git stash pop`: 弹出暂存的更改，继续开发，恢复的同时把stash内容也删了
  - `git stash list`: 查看被statsh的内容
  - `git stash drop`: 删除stash的内容   
- 
+```
+
