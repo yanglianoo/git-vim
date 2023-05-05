@@ -28,7 +28,8 @@ $(BUILD)/boot/%.bin: #使用BUILD变量
 - 内置变量
 
 ```makefile
-# $(CC) 指向当前使用的编译器
+$(CC) 指向当前使用的编译器
+$(MAKE) 表示 make 
 ```
 
 - 自动变量
@@ -44,9 +45,26 @@ $(BUILD)/boot/%.bin: $(SRC)/boot/%.asm
 $@ 代表$(BUILD)/boot/%.bin
 $< 代表$(SRC)/boot/%.asm
 ```
+## 参数
+
+- `-C`：指定Make命令的工作目录
+
+  ```makefile
+  make -C subdir
+  ```
+
+- `-j`：指定并行执行任务的数量
+
+  ```makefile
+  make -j4
+  ```
+
+  
+
 ## 函数
+
 - `wildcard`      
-`wildcard`是GNU Make中的一个函数，用于获取指定路径下的文件列表。该函数的基本语法如下：
+	`wildcard`是GNU Make中的一个函数，用于获取指定路径下的文件列表。该函数的基本语法如下：
 	```makefile
 	$(wildcard pattern)
 	```
@@ -75,6 +93,48 @@ $< 代表$(SRC)/boot/%.asm
 	OBJS=$(patsubst src/%.c,obj/%.o,$(SRCS))
 	```
 	在这个例子中，pattern是"src/%.c"，其中 % 表示匹配任意非空字符，replacement是"obj/%.o"，用来替换匹配到的部分，string是$(SRCS)，即需要被替换的原始字符串。
+
+## 逻辑操作
+Makefile中支持`for`循环            
+- `foreach`
+	
+	```php
+	$(foreach <var>,<list>,<text>)
+	```
+	
+	其中，"<var>"表示迭代变量的名称，"<list>"表示要迭代的元素列表，"<text>"表示要在每个元素上执行的命令。
+	
+	例如，以下代码段使用foreach函数来迭代一个列表，打印出每个元素的值：
+	
+	```makefile
+	LIST := foo bar baz
+	
+	all:
+		$(foreach item,$(LIST), \
+		    echo $(item); \
+		)
+	```
+
+- `for`
+
+  当Makefile中需要对一组目录或文件进行相同的操作时，可以使用for循环来遍历这些目录或文件，并执行相同的操作。
+
+  在Makefile中，for循环通常使用Makefile的内置函数"foreach"或者"eval"来实现。但是，Makefile也支持标准的for循环语句，例如：
+
+  ```makefile
+  SECTIONS = \
+  	./asm \
+  	./os \
+  
+  .DEFAULT_GOAL := all
+  all :
+  	@echo "begin compile ALL exercises for assembly samples ......................."
+  	for dir in $(SECTIONS); do $(MAKE) -C $$dir || exit "$$?"; done
+  	@echo "compile ALL exercises finished successfully! ......"
+  ```
+
+  上面的`for`循环代表进入每一个子目录执行`make`命令，如果执行失败，则直接退出。
+
 ## 杂项
 
 - Makefile中使用`shell`命令，
