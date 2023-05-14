@@ -138,3 +138,10 @@ git@github.com:XXXX/project.git
   git push origin 分支名称:远程分支名称
   ```
 
+
+
+- git push origin 时报错
+
+  ![image-20230514170225074](image/image-20230514170225074.png)
+
+  解决办法： 产生这个错误的时候我开着vpn，切换一个网络就行，比如把全局代理关闭
