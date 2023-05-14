@@ -96,3 +96,45 @@ git@github.com:XXXX/project.git
  - `git stash drop`: 删除stash的内容   
 ```
 
+
+
+- `git HEAD detached from origin`  游离分支问题
+
+  这个问题是因为分支选错了，所以说后续的提交都提交到了一个匿名分支之上，整个状态是游离了的，下面说一下解决问题的步骤
+
+  1.查看在游离状态下提交的最新commit号
+
+  ```
+  git branch -v
+  ```
+
+  2.创建一个临时的分支，创建完成之后切换到该分支上查看一下
+
+  ```
+  git branch temp 最新的commit号
+  ```
+
+  3.切换到要合并的分支智商
+
+  ```
+  git checkout 要合并临时分支的分支名称
+  ```
+
+  4.合并分支
+
+  ```
+  git merge temp
+  ```
+
+  5.删除临时分支
+
+  ```
+  git branch -d temp
+  ```
+
+  6.推送合并后的分支到远程仓库
+
+  ```
+  git push origin 分支名称:远程分支名称
+  ```
+
